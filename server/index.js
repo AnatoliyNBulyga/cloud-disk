@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import config from "config";
 
 import authRouter from "./routes/auth.routes.js";
+import fileRouter from "./routes/file.routes.js";
 import corsMiddleware from "./middleware/cors.middleware.js";
 
 const app = express();
@@ -12,6 +13,7 @@ const DB_URL = config.get('dbUrl');
 app.use(corsMiddleware);
 app.use(express.json());
 app.use('/api/auth', authRouter);
+app.use('/api/files', fileRouter);
 
 const start = async () => {
     try {

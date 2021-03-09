@@ -6,6 +6,9 @@ import config from "config";
 
 import User from "../models/User.js";
 import authMiddleware from "../middleware/auth.middleware.js";
+import FileService from "../services/FileService.js";
+import File from "../models/File.js";
+import fileService from "../services/FileService.js";
 
 const router = new Router();
 
@@ -28,6 +31,7 @@ router.post('/registration',
             const hashPassword = await bcrypt.hash(password, 8);
             const user = new User({email, password: hashPassword});
             await user.save();
+            await FileService.createDir(new File({user: user.id, name: ''}))
             return res.json({message: "User was created"})
         } catch(e) {
             console.log(e);
