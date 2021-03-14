@@ -8,7 +8,8 @@
     align-items: center;
 
     &:hover {
-        transform: scale(1.01)
+        transform: scale(1.01);
+        cursor: pointer;
     }
 
     &__date {

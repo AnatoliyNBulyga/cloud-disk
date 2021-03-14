@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import config from "config";
+import fileUpload from "express-fileupload";
 
 import authRouter from "./routes/auth.routes.js";
 import fileRouter from "./routes/file.routes.js";
@@ -10,6 +11,7 @@ const app = express();
 const PORT = config.get('serverPort');
 const DB_URL = config.get('dbUrl');
 
+app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());
 app.use('/api/auth', authRouter);

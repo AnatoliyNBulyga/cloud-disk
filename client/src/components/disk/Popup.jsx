@@ -15,17 +15,18 @@ const Popup = () => {
         dispatch(createDir(currentDir, dirName));
         setDirName('');
         dispatch(togglePopup());
-    }
+    };
+    const togglePopupHandler = () => dispatch(togglePopup());
 
     return (
-        <div className="popup" onClick={() => dispatch(togglePopup())}>
+        <div className="popup" onClick={togglePopupHandler}>
             <div className="popup__content" onClick={event => event.stopPropagation()}>
                 <div className="popup__header">
                     <div className="popup__title">Создать новую папку</div>
-                    <button className="popup__close" onClick={() => dispatch(togglePopup())}>X</button>
+                    <button className="popup__close" onClick={togglePopupHandler}>X</button>
                 </div>
                 <Input type="text" placeholder="Введите название папки..." value={dirName} setValue={setDirName} />
-                <button className="popup__create" onClick={() => createHandler()}>Создать</button>
+                <button className="popup__create" onClick={createHandler}>Создать</button>
             </div>
         </div>
     )
