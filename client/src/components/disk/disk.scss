@@ -1,0 +1,43 @@
+.disk {
+    margin-top: 20px;
+
+    &__btns {
+        display: flex;
+    }
+    &__create {
+        margin-left: 10px;
+    }
+}
+.popup {
+    background-color: rgba(0,0,0,.5);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        width: 400px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__create {
+        align-self: flex-end;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+    input {
+        margin: 20px 0;
+    }
+}

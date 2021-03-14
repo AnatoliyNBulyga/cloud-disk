@@ -1,0 +1,20 @@
+@import "../../../utils/colors.scss";
+
+.file {
+    margin: 10px 0;
+    border-bottom: 2px solid $font-color;
+    display: grid;
+    grid-template-columns: 1fr 4fr repeat(4, 1fr);
+    align-items: center;
+
+    &:hover {
+        transform: scale(1.01)
+    }
+
+    &__date {
+        grid-column-start: 5;
+    }
+    &__size {
+        grid-columnt-start: 6;
+    }
+}
