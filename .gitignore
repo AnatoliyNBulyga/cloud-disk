@@ -5,3 +5,7 @@
 
 # production
 /client/build
+
+# css preprocessing
+/client/src/**/*.css
+/client/src/**/*.map

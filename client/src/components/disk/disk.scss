@@ -1,0 +1,66 @@
+@import "../../utils/colors.scss";
+
+.disk {
+    margin-top: 20px;
+
+    &__btns {
+        display: flex;
+    }
+    &__create {
+        margin-left: 10px;
+    }
+    &__upload-input {
+        display: none;
+    }
+    &__upload-label {
+        border: 2px dashed $font-color;
+        padding: 5px 10px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+}
+.popup {
+    background-color: rgba(0,0,0,.5);
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        width: 400px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__create {
+        align-self: flex-end;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+    input {
+        margin: 20px 0;
+    }
+
+}
+
+.drop-area {
+    width: 100%;
+    height: calc(100vh - 50px - 40px);
+    margin: 20px;
+    border: 2px dashed $font-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
