@@ -7,6 +7,7 @@ import Popup from "./Popup.jsx";
 
 import "./disk.scss";
 import { setCurrentDir, togglePopup } from "../../redusers/fileReducer.js";
+import Uploader from "../fileList/uploader/Uploader.jsx";
 
 const Disk = () => {
     const dispatch = useDispatch();
@@ -59,7 +60,8 @@ const Disk = () => {
                 </div>
             </div>
             <FileList/>
-            {popupDisplay && <Popup />}   
+            {popupDisplay && <Popup />}
+            <Uploader />   
         </div>
         :
         <div className="drop-area" onDrop={dropHandler} onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
