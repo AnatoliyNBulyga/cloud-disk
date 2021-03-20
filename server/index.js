@@ -14,6 +14,7 @@ const DB_URL = config.get('dbUrl');
 app.use(fileUpload({}));
 app.use(corsMiddleware);
 app.use(express.json());
+app.use(express.static('static'));
 app.use('/api/auth', authRouter);
 app.use('/api/files', fileRouter);
 

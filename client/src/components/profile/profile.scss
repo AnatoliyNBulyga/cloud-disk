@@ -1,0 +1,8 @@
+.profile {
+    display: flex;
+    margin: 30px 0;
+    & button {
+        margin-right: 30px;
+        cursor: pointer;
+    }
+}
