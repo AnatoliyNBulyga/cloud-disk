@@ -6,6 +6,7 @@ import Registration from "./authorization/Registration";
 import Login from "./authorization/Login";
 import Navbar from "./navbar/Navbar";
 import Disk from "./disk/Disk";
+import Profile from "./profile/Profile.jsx";
 import {auth} from "../actions/user";
 import "./app.scss";
 
@@ -29,6 +30,7 @@ function App() {
               </Switch>
             :  <Switch>
                 <Route exact path="/" component={Disk} />
+                <Route exact path="/profile" component={Profile} />
                 <Redirect to="/" />
               </Switch>
           } 
