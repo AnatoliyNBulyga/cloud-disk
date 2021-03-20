@@ -7,7 +7,23 @@ import "./fileList.scss";
 
 const FileList = () => {
     const files = useSelector(state => state.file.files);
+    const fileView = useSelector(state => state.file.view);
 
+    if (!files.length) {
+        return (
+            <div className="loader">Файлы не найдены</div>
+        )
+    }
+
+    if (fileView === 'plate') {
+        return (
+            <div className="fileplate">
+                {files.map( file => 
+                    <File key={file._id} file={file}/>
+                )} 
+            </div>
+        )
+    }
     return (
         <div className="filelist">
             <div className="filelist__header">

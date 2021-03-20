@@ -1,6 +1,6 @@
 
 .filelist {
-    margin: 20px 0;
+    margin: 30px 0;
 
     &__header {
         display: grid;
@@ -18,6 +18,12 @@
         grid-columnt-start: 6;
 
     }
+}
+
+.fileplate {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 0;
 }
 
 .file-enter-active {

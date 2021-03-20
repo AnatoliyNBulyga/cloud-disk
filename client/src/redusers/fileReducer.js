@@ -4,13 +4,15 @@ const ADD_FILE = "ADD_FILE";
 const SET_POPUP_DISPLAY = "SET_POPUP_DISPLAY";
 const PUSH_TO_STACK = "PUSH_TO_STACK";
 const DELETE_FILE = "DELETE_FILE";
+const SET_VIEW = "SET_VIEW";
 
 
 const defaultState = {
     files: [],
     currentDir: null,
     popupDisplay: false,
-    dirStack: []
+    dirStack: [],
+    view: "list"
 };
 
 export default function fileReducer(state = defaultState, action) {
@@ -23,6 +25,7 @@ export default function fileReducer(state = defaultState, action) {
         case DELETE_FILE: return {...state, files: [ 
             ...state.files.filter(file => file._id !== action.payload)
         ]}
+        case SET_VIEW: return {...state, view: action.payload}
         
         default:
             return state;
@@ -57,3 +60,8 @@ export const deleteFileAction = dirId => ({
     type: DELETE_FILE,
     payload: dirId
 });
+
+export const setView = type => ({
+    type: SET_VIEW,
+    payload: type
+})
