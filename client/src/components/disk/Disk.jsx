@@ -4,9 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {getFiles, uploadFile} from "../../actions/file.js";
 import FileList from "../fileList/FileList.jsx";
 import Popup from "./Popup.jsx";
+import Loader from "../loader/Loader.jsx";
 
 import "./disk.scss";
-import { setCurrentDir, togglePopup } from "../../redusers/fileReducer.js";
+import { setCurrentDir, togglePopup, setView } from "../../redusers/fileReducer.js";
 import Uploader from "../fileList/uploader/Uploader.jsx";
 
 const Disk = () => {
@@ -14,6 +15,8 @@ const Disk = () => {
     const currentDir = useSelector(state => state.file.currentDir);
     const popupDisplay = useSelector(state => state.file.popupDisplay);
     const dirStack = useSelector(state => state.file.dirStack);
+    const loader = useSelector(state => state.app.loader);
+
     const [dragEnter, setDragEnter] = useState(false);
     const [sort, setSort] = useState('type');
 
@@ -48,7 +51,9 @@ const Disk = () => {
         let files = [...event.dataTransfer.files];
         files.forEach(file => dispatch(uploadFile(file, currentDir)));
         setDragEnter(false);
-    }
+    };
+
+    if (loader) return <Loader />
 
     return ( !dragEnter ?
         <div className="disk" onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
@@ -64,6 +69,8 @@ const Disk = () => {
                     <option value="type">По типу</option>
                     <option value="date">По дате</option>
                 </select>
+                <button className="disk__plate" onClick={() => dispatch(setView('plate'))}></button>
+                <button className="disk__list" onClick={() => dispatch(setView('list'))}></button>
             </div>
             <FileList/>
             {popupDisplay && <Popup />}

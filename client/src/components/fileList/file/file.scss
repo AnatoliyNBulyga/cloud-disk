@@ -36,3 +36,27 @@
         display: block;
     }
 }
+
+.file-plate {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__img {
+        height: 100px;
+        width: 100px;
+    }
+    &__btns {
+        display: none;
+    }
+    &:hover &__img {
+        transform: scale(1.01);
+    }
+
+    &:hover &__btns {
+        display: flex;
+    }
+
+}

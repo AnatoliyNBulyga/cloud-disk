@@ -11,6 +11,8 @@ import sizeFormat from "../../../utils/sizeFormat.js";
 const File = ({file}) => {
     const dispatch = useDispatch();
     const currentDir = useSelector(state => state.file.currentDir);
+    const fileView = useSelector(state => state.file.view);
+
     const openDirHandler = () => {
         if (file.type !== 'dir') return false;
         dispatch(pushToStack(currentDir));
@@ -23,6 +25,19 @@ const File = ({file}) => {
     const deleteClickHandler = (e) => {
         e.stopPropagation();
         dispatch(deleteFile(file));
+    }
+
+    if (fileView === 'plate') {
+        return (
+            <div className="file-plate" onClick={openDirHandler}>
+                <img src={file.type === 'dir' ? dirLogo : fileLogo} alt="file icon" className="file-plate__img" />
+                <div className="file-plate__name">{file.name}</div>
+                <div className="file-plate__btns">
+                    {file.type !== 'dir' && <button onClick={ event => downloadClickHandler(event)} className="file-plate__btn file__download">download</button>}
+                    <button onClick={(e) => deleteClickHandler(e)} className="file-plate__btn file__delete">delete</button>
+                </div>
+            </div>
+        )
     }
 
     return (
