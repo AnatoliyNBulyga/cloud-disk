@@ -13,10 +13,14 @@ import "./app.scss";
 function App() {
   const isAuth = useSelector(state => state.user.isAuth);
   const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    dispatch(auth());  
-  }, []);
+    if (token) {
+      dispatch(auth());
+    }
+      
+  }, [token, dispatch]);
   return (
     <BrowserRouter>
       <div className="app">

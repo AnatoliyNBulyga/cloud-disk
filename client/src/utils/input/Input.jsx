@@ -7,7 +7,7 @@ const Input = (props) => {
         <input onChange={ event => props.setValue(event.target.value) }  
                 value={props.value} 
                 type={props.type} 
-                placeholder={props.placeholder} />   
+                placeholder={props.placeholder} required/>   
     );
 };
 

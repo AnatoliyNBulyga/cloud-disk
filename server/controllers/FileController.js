@@ -14,10 +14,10 @@ class FileController {
             const parentFile = await File.findOne({_id: parent});
             if (!parentFile) {
                 file.path = name;
-                await FileService.createDir(file);
+                await FileService.createDir(req, file);
             } else {
                 file.path = `${parentFile.path}\\${file.name}`;
-                await FileService.createDir(file);
+                await FileService.createDir(req, file);
                 parentFile.childs.push(file._id);
                 await parentFile.save()
             }
@@ -66,9 +66,9 @@ class FileController {
 
             let path;
             if (parent) {
-                path = `${config.get('filePath')}\\${user._id}\\${parent.path}\\${file.name}`;
+                path = `${req.filePath}\\${user._id}\\${parent.path}\\${file.name}`;
             } else {
-                path = `${config.get('filePath')}\\${user._id}\\${file.name}`;
+                path = `${req.filePath}\\${user._id}\\${file.name}`;
             }
             if (fs.existsSync(path)) {
                 return res.status(400).json({message: 'File already exist'});
@@ -85,7 +85,7 @@ class FileController {
                 type,
                 size: file.size,
                 path: filePath, 
-                parent: parent?.id,
+                parent: parent ? parent.id : null,
                 user: user._id
             });
             await dbFile.save();
@@ -100,9 +100,8 @@ class FileController {
     }
     async downloadFile(req, res) {
         try {
-
             const file = await File.findOne({_id: req.query.id, user: req.user.id});
-            const path = fileService.getPath(file);
+            const path = FileService.getPath(req, file);
             if (fs.existsSync(path)) {
                 return res.download(path, file.name);
             } else {
@@ -120,7 +119,7 @@ class FileController {
             if(!file) {
                 return res.status(400).json({message: "File not found"});
             }
-            FileService.deleteFile(file);
+            FileService.deleteFile(req, file);
             await file.remove();
             return res.json({message: "File was deleted"});
         } catch(e) {
@@ -152,21 +151,20 @@ class FileController {
 
         } catch(e) {
             console.log(e);
-            return res.status(400).json({message: "Upload avatar error"})
+            return res.status(404).json({message: "Upload avatar error"})
         }
     }
     async deleteAvatar(req, res) {
         try {
            const user = await User.findById(req.user.id);
            fs.unlinkSync(config.get("staticPath") + "\\" + user.avatar);
-           
            user.avatar = null;
            await user.save();
            return res.json(user);
 
         } catch(e) {
             console.log(e);
-            return res.status(400).json({message: "Delete avatar error"})
+            return res.status(404).json({message: "Delete avatar error"})
         }
     }
 }

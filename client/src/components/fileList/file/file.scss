@@ -1,15 +1,20 @@
 @import "../../../utils/colors.scss";
 
 .file {
-    margin: 10px 0;
-    border-bottom: 2px solid $font-color;
+    margin: 12px 0;
+    min-height: 45px;
+    border-bottom: 0.1rem solid $font-color;
     display: grid;
     grid-template-columns: 1fr 4fr repeat(4, 1fr);
     align-items: center;
 
     &:hover {
-        transform: scale(1.01);
+        transform: scale(1.002);
         cursor: pointer;
+    }
+    &__img {
+        width: 30px;
+        height: 30px;
     }
 
     &__date {
@@ -30,6 +35,7 @@
     &:hover &__download {
         grid-column-start: 5;
         display: block;
+        margin-right: 5px;
     }
     &:hover &__delete {
         grid-column-start: 6;
@@ -38,18 +44,21 @@
 }
 
 .file-plate {
-    width: 150px;
-    height: 150px;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 1fr 30px;
+    &__name {
+        padding-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     &__img {
-        height: 100px;
-        width: 100px;
+        height: 60px;
+        width: 60px;
     }
     &__btns {
         display: none;
+        margin: 0 5px;
     }
     &:hover &__img {
         transform: scale(1.01);
@@ -58,5 +67,69 @@
     &:hover &__btns {
         display: flex;
     }
+    &:hover &__download {
+        margin-right: 10px;
+    }
 
+}
+
+@media(max-width: 900px) {
+    .file {
+        font-size: 14px;
+        grid-template-columns: 50px 2fr repeat(4, 1fr);
+        &__img {
+            width: 20px;
+            height: 20px;
+        }
+        &__delete.btn {
+            font-size: 13px;
+            padding: 0.15rem 0.4rem;
+        }
+        &__download.btn {
+            font-size: 13px;
+            padding: 0.15rem 0.4rem;
+        }
+    }
+    .file-plate {
+        font-size: 14px;
+    }
+}
+@media(max-width: 550px) {
+    .file {
+        min-height: 40px;
+        grid-template-columns: 30px minmax(100px, 1fr) 1fr 1fr;
+        &__name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &__date, &__size {
+            display: none;
+        }
+        &__delete.btn {
+            display: block;
+            margin: 0 5px;
+            grid-column-start: 4;
+        }
+        &__download.btn {
+            display: block;
+            margin: 0 5px;
+            grid-column-start: 3;
+        }
+    }
+    .file-plate {
+        font-size: 13px;
+        width: auto;
+        height: auto;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        &__delete.btn {
+            font-size: 13px;
+            padding: 0.15rem 0.4rem;
+        }
+        &__download.btn {
+            font-size: 13px;
+            padding: 0.15rem 0.4rem;
+        }
+        
+    }
 }

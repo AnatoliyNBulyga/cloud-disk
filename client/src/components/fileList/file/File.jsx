@@ -33,8 +33,8 @@ const File = ({file}) => {
                 <img src={file.type === 'dir' ? dirLogo : fileLogo} alt="file icon" className="file-plate__img" />
                 <div className="file-plate__name">{file.name}</div>
                 <div className="file-plate__btns">
-                    {file.type !== 'dir' && <button onClick={ event => downloadClickHandler(event)} className="file-plate__btn file__download">download</button>}
-                    <button onClick={(e) => deleteClickHandler(e)} className="file-plate__btn file__delete">delete</button>
+                    {file.type !== 'dir' && <button onClick={ event => downloadClickHandler(event)} className="file-plate__btn file-plate__download btn btn-default">Download</button>}
+                    <button onClick={(e) => deleteClickHandler(e)} className="file-plate__btn file-plate__delete btn btn-default">Delete</button>
                 </div>
             </div>
         )
@@ -46,8 +46,8 @@ const File = ({file}) => {
             <div className="file__name">{file.name}</div>
             <div className="file__date">{file.date.slice(0,10)}</div>
             <div className="file__size">{sizeFormat(file.size)}</div>
-            {file.type !== 'dir' && <button onClick={ event => downloadClickHandler(event)} className="file__btn file__download">download</button>}
-            <button onClick={(e) => deleteClickHandler(e)} className="file__btn file__delete">delete</button>
+            {file.type !== 'dir' && <button onClick={ event => downloadClickHandler(event)} className="file__btn file__download btn btn-default">Download</button>}
+            <button onClick={(e) => deleteClickHandler(e)} className="file__btn file__delete btn btn-default">Delete</button>
         </div>
     );
 };

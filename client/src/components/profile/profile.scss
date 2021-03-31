@@ -1,8 +1,26 @@
+@import "../../utils/colors.scss";
 .profile {
     display: flex;
+    align-items: center;
     margin: 30px 0;
-    & button {
+    &__delete-button {
         margin-right: 30px;
         cursor: pointer;
+    }
+    &__upload {
+        display: inline-block;
+        border: 0.1rem dashed $primary-light-color;
+        padding: 5px 10px;
+        margin-left: 20px;
+        cursor: pointer;
+        color: $font-light-color;
+        &:hover {
+            border: 0.1rem dashed $primary-color;
+            color: $font-color;
+        }
+
+    }
+    &__upload-input {
+        display: none;
     }
 }

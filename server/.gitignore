@@ -1,0 +1,5 @@
+# dependencies
+/server/node_modules
+/server/config
+/server/files
+/server/static

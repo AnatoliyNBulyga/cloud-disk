@@ -4,29 +4,34 @@
     display: flex;
     flex-direction: column;
     width: 500px;
+    max-width: 100%;
     align-items: center;
     background-color: white;
-    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(143,168,191,.35);
+    border-radius: 0.3rem;
     padding: 30px;
     align-self: center;
     margin-top: 100px;
     &__header {
-        font-size: 30px;
+        font-size: 26px;
         font-weight: 700;
+        padding-bottom: 10px;
+    }
+    &__btn {
+        align-self: flex-end;
+        margin-top: 10px;
     }
 
     & input {
         margin: 10px 20px;
     }
 
-    &__btn {
-        border: none;
-        background-color: $font-color;
-        border-radius: 8px;
-        color: white;
-        font-weight: 700;
-        padding: 5px 10px;
-        align-self: flex-end;
-        margin-top: 10px;
+}
+
+@media(max-width: 450px) {
+    .authorization {
+        &__btn {
+            width: 100%;
+        }
     }
 }
