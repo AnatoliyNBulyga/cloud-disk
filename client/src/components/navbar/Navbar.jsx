@@ -3,13 +3,14 @@ import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import "./navbar.scss";
-import logo from "../../assets/img/navbar-logo.svg";
+import logo from "../../assets/img/logo-new.svg";
 import defaultAvatar from "../../assets/img/avatar-default.svg";
 import {API_URL} from "../../config.js";
 
 import {logout} from "../../redusers/userReducer.js";
 import {searchFiles, getFiles} from "../../actions/file.js";
 import {showLoader} from "../../redusers/appReducer.js";
+import {SearchOutlined} from '@ant-design/icons';
 
 const Navbar = () => {
     
@@ -20,7 +21,6 @@ const Navbar = () => {
     const [searchName, setSearchName] = useState('');
     const [searchTimeout, setSearchTimeout] = useState(false);
     const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : defaultAvatar;
-    console.log(currentUser)
 
     const searchChangeHandler = (e) => {
         setSearchName(e.target.value);
@@ -40,22 +40,33 @@ const Navbar = () => {
             <div className="container">
                 <NavLink to="/"> 
                     <div className="navbar__brand">
-                        <img src={logo} alt="logo" className="navbar__logo" />
+                        <img src={logo} alt="logo" width="30" height="30" className="navbar__logo" />
                         <div className="navbar__header">MERN CLOUD</div>
                     </div>   
                 </NavLink> 
 
-                {isAuth && <input 
+                {isAuth && <div className="navbar__search-wrap"><SearchOutlined className="navbar__search-icon"/><input 
                     value={searchName}
                     onChange={ e => searchChangeHandler(e)}
                     className="navbar__search" 
                     type="text" 
-                    placeholder="Название файла..." />
+                    placeholder="Search" /></div>
                 }
-                {!isAuth && <div className="navbar__login"><NavLink to="/login">Войти</NavLink></div>} 
-                {!isAuth && <div className="navbar__registration"><NavLink to="/registration">Регистрация</NavLink></div>}
-                {isAuth && <button className="navbar__logout" onClick={() => dispatch(logout())}>Выйти</button>}
-                {isAuth && <NavLink to="/profile"><img className="navbar__avatar" src={avatar} alt="avatar" /></NavLink>}
+                
+                    {!isAuth && <button className="btn navbar__login"><NavLink to="/login">LOG IN</NavLink></button>} 
+                    {!isAuth && <button className="btn btn-default navbar__registration"><NavLink to="/registration">SIGN UP</NavLink></button>}
+                    {isAuth && 
+                        <div className="navbar__buttons">
+                            <button className="btn btn-default navbar__logout" onClick={() => dispatch(logout())}>LOG OUT</button>
+                            <NavLink to="/profile">
+                                <span className="navbar__avatar-wrap">
+                                    <img className="navbar__avatar" src={avatar} alt="avatar" />
+                                </span>
+                            </NavLink>
+                        </div>
+                    }
+
+                
             </div>
             
         </div>

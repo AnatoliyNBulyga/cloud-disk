@@ -20,7 +20,7 @@ export default function userReducer(state = defaultState, action) {
                 ...state,
                 currentUser: {},
                 isAuth: false
-            }    
+            };   
 
         default:
             return state;

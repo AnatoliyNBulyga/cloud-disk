@@ -31,7 +31,7 @@ router.post('/registration',
             const hashPassword = await bcrypt.hash(password, 8);
             const user = new User({email, password: hashPassword});
             await user.save();
-            await FileService.createDir(new File({user: user.id, name: ''}))
+            await FileService.createDir(req, new File({user: user.id, name: ''}))
             return res.json({message: "User was created"})
         } catch(e) {
             console.log(e);
@@ -45,11 +45,11 @@ router.post('/login',
             const {email, password} = req.body;
             const user = await User.findOne({email});
             if (!user) {
-                return res.status(400).json({message: "User not found"});
+                return res.status(404).json({message: "Invalid email or password"});
             }
             const isPassValid = bcrypt.compareSync(password, user.password);
             if (!isPassValid) {
-                return res.status(400).json({message: "Invalid password"});
+                return res.status(404).json({message: "Invalid email or password"});
             }
             const token = jwt.sign({id: user.id}, config.get("secretKey"), {expiresIn: "1h"});
             return res.json({

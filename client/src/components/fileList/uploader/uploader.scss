@@ -1,57 +1,92 @@
 @import "../../../utils/colors.scss";
 
 .uploader {
-    height: 300px;
-    width: 300px;
+    height: 250px;
+    width: 400px;
+    max-width: 100%;
     position: fixed;
-    background-color: $font-color;
-    bottom: 0;
-    right: 0;
-    padding: 20px;
-    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(143,168,191,.35);
+    bottom: 10px;
+    left: 10px;
+    padding: 25px 15px;
+    border-radius: 0.3rem;
     overflow-y: auto;
 
     &__header {
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
     }
     &__title {
-        color: $background-color;
+        color: $font-color;
         font-size: 1.2rem;
+        line-height: 1.3;
+        font-weight: 700;
+        margin-bottom: 10px;
     }
     &__close {
+        border: none;
+        outline: none;
+        background: none;
         padding: 3px;
         cursor: pointer;
+        & svg {
+            fill: $font-light-color;
+            transition: fill .3s ease;
+        }
+        &:hover svg{
+            fill: $font-color;
+        }
     }
 }
 
 .upload-file {
     background-color: $background-color;
-    border-radius: 8px;
+    border-radius: 0.3rem;
     margin: 5px 0;
     padding: 5px 10px;
     &__header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
     &__progress-bar {
-        height: 1rem;
-        border-radius: 8px;
+        height: 0.2rem;
         background-color: $font-color;
         display: flex;
-        margin: 3px 0;
+        margin: 20px 0 3px;
+        position: relative;
     }
     &__bar {
-        background-color: green;
+        background-color: $accent-color;
         width: 0;
-        border-radius: 8px;
+        border-radius: 0.3rem;
     }
     &__percent {
-        color: $background-color;
+        color: $font-color;
         left: 50%;
+        bottom: 0;
         position: absolute;
+        z-index: 2;
     }
     &__remove {
+        border: none;
+        outline: none;
+        background: none;
         cursor: pointer;
+        & svg {
+            fill: $font-light-color;
+            transition: fill .3s ease;
+        }
+        &:hover svg{
+            fill: $font-color;
+        }
+    }
+}
+
+@media(max-width: 500px) {
+    .uploader {
+        display: none;
     }
 }

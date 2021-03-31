@@ -11,7 +11,7 @@ const FileList = () => {
 
     if (!files.length) {
         return (
-            <div className="loader">Файлы не найдены</div>
+            <div className="loader">Files not found</div>
         )
     }
 
@@ -27,9 +27,9 @@ const FileList = () => {
     return (
         <div className="filelist">
             <div className="filelist__header">
-                <div className="filelist__name">Название</div>
-                <div className="filelist__date">Дата</div>
-                <div className="filelist__size">Размер</div>
+                <div className="filelist__name">Name</div>
+                <div className="filelist__date">Date</div>
+                <div className="filelist__size">Size</div>
             </div>
             <TransitionGroup>
                 {files.map( file => 

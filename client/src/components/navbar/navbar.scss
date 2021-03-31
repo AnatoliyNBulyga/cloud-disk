@@ -2,13 +2,16 @@
 
 .navbar {
     display: flex;
-    height: 50px;
+    height: 80px;
     justify-content: center;
     background-color: white;
     width: 100%;
+    border-bottom: 0.1rem solid lighten($font-color, 80%);
     & a {
+        color: lighten($font-color, 25%);
         &:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            color: $font-color;
         }
         text-decoration: none;
     }
@@ -16,14 +19,23 @@
         display: flex;
         align-items: center;
     }
+    &__buttons {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        & > a {
+            display: flex;
+        }
+    }
     &__header {
-        margin-left: 10px;
-        font-size: 24px;
+        margin-left: 6px;
+        font-size: 18px;
         font-weight: 700;
     }
     &__login {
         margin-left: auto;
-        margin-right: 20px;
+        margin-right: 5px;
+
     }
     &__logout {
         margin-left: auto;
@@ -34,16 +46,65 @@
         background-color: white;
     }
     &__search {
-        width: 200px;
-        margin-left: 30px;
+        padding-left: 30px;
+        &-wrap {
+            margin-left: 30px;
+            max-width: 200px;
+            position: relative;
+        }
+        &-icon {
+            position: absolute;
+            z-index: 2;
+            top: 5px;
+            left: 4px;
+        }
     }
     &__avatar {
-        max-width: 30px;
-        border-radius: 50%;
+        max-width: 100%;
+        &-wrap {
+            display: inline-block;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            overflow: hidden;
+        }
+        
     }
 }
 .container {
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
     width: 1140px;
+    max-width: 100%;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+@media(max-width: 590px) {
+    .navbar {
+        height: auto;
+        padding: 20px 0;
+        &__brand {
+            margin-right: 30px;
+        }
+        &__search-wrap {
+            margin-left: auto;
+
+        }
+        &__buttons {
+            margin: 15px 0 0 auto;
+            width: 200px;
+        }
+    }
+}
+
+@media(max-width: 450px) {
+
+    .navbar {
+        &__header {
+            display: none;
+        }
+    }
 }

@@ -9,6 +9,8 @@ import Loader from "../loader/Loader.jsx";
 import "./disk.scss";
 import { setCurrentDir, togglePopup, setView } from "../../redusers/fileReducer.js";
 import Uploader from "../fileList/uploader/Uploader.jsx";
+import { LeftOutlined } from '@ant-design/icons';
+import { Select } from 'antd';
 
 const Disk = () => {
     const dispatch = useDispatch();
@@ -22,7 +24,7 @@ const Disk = () => {
 
     useEffect(() => {
         dispatch(getFiles(currentDir, sort));
-    }, [currentDir, sort]);
+    }, [currentDir, sort, dispatch]);
 
     const showPopupHandler = () => {
         dispatch(togglePopup());
@@ -52,33 +54,42 @@ const Disk = () => {
         files.forEach(file => dispatch(uploadFile(file, currentDir)));
         setDragEnter(false);
     };
+    const { Option } = Select;
+    const handleChange = (value) => {
+        setSort(value);
+    }
 
     if (loader) return <Loader />
 
     return ( !dragEnter ?
         <div className="disk" onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
             <div className="disk__btns">
-                <button className="disk__back" onClick={backClickHandler}>Назад</button>
-                <button className="disk__create" onClick={showPopupHandler}>Создать папку</button>
-                <div className="disk__upload">
-                    <label htmlFor="disk__upload-input" className="disk__upload-label">Загрузить файл</label>
-                    <input multiple={true} onChange={event => fileUploadHandler(event)} type="file" id="disk__upload-input" className="disk__upload-input"/>
+                <div className="disk__btns-left">
+                    <button className="btn disk__back" onClick={backClickHandler}><LeftOutlined className="icon-btn" />Back</button>
+                    <button className="btn btn-default disk__create" onClick={showPopupHandler}>Create dir</button>
+                    <div className="disk__upload">
+                        <label htmlFor="disk__upload-input" className="disk__upload-label">Upload</label>
+                        <input multiple={true} onChange={event => fileUploadHandler(event)} type="file" id="disk__upload-input" className="disk__upload-input"/>
+                    </div>
                 </div>
-                <select value={sort} onChange={e => setSort(e.target.value)} className="disk__select">
-                    <option value="name">По имени</option>
-                    <option value="type">По типу</option>
-                    <option value="date">По дате</option>
-                </select>
-                <button className="disk__plate" onClick={() => dispatch(setView('plate'))}></button>
-                <button className="disk__list" onClick={() => dispatch(setView('list'))}></button>
-            </div>
+                <div className="disk__btns-right">
+                    <Select value={sort} onChange={handleChange} className="disk__select">
+                        <Option value="name">By name</Option>
+                        <Option value="type">By type</Option>
+                        <Option value="date">By date</Option>
+                    </Select>
+                    <button className="disk__plate" onClick={() => dispatch(setView('plate'))}></button>
+                    <button className="disk__list" onClick={() => dispatch(setView('list'))}></button>
+                </div>
+                
+                </div>
             <FileList/>
             {popupDisplay && <Popup />}
             <Uploader />   
         </div>
         :
         <div className="drop-area" onDrop={dropHandler} onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
-            Перетащите файлы сюда
+            Drop the files
         </div>
     );
 };
