@@ -1,8 +1,7 @@
-## Проект МERN full-stack приложения oблачного хранилища по типу гугл диска
+## МERN full-stack cloud storage application like google drive
 
 **Stack:**
-
-- ReactJS + хуки
+- ReactJS + hooks
 - React Router
 - Redux
 - Redux thunk
@@ -12,13 +11,12 @@
 - Express.js
 - MongoDB
 - REST API
-- Authentication by JWT token
+- Authorization by JWT token
 
-## Запуск клиентской части приложения
+**You can evaluate the work of the app here:** https://mern-cloup-app.herokuapp.com/
+
+## Launch the client side of the app
 ### `npm start`
 
-## Запуск серверной части
+## Launch the server side of the app
 ### `npm run dev`
-
-**Оценить работу приложения можно здесь:** https://mern-cloup-app.herokuapp.com/
-
